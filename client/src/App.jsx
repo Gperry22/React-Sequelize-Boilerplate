@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import API from './utils/API';
+import API from './utils';
 import AddNumber from './components/AddNumber';
 import FindNumber from './components/FindNumber';
 
@@ -25,7 +25,15 @@ class App extends Component {
 
 	enterSubmitNameNumber = (event) => {
 		event.preventDefault();
-		if (!this.state.name.length && !this.state.number.length) {
+		if (this.state.name.length && this.state.number.length) {
+			const userToCreate = {
+				name: this.state.name,
+				number: this.state.number
+			};
+			API.createUser(userToCreate)
+				.then(alert('Name and Number added to the database.'))
+				.catch((err) => console.log(err));
+		} else {
 			alert('Please enter your name and favorite number');
 		}
 	};
@@ -34,6 +42,21 @@ class App extends Component {
 		event.preventDefault();
 		if (!this.state.nameToFindNumber) {
 			alert('Please Enter your Name to find out your favorite Number');
+		} else {
+			const userName = this.state.nameToFindNumber;
+			API.getUserNumber(userName)
+				.then((res) => {
+					console.log(res.data);
+					if (res.data === null) {
+						alert('There is no user by that name');
+					} else {
+						let responseName = res.data.name.toLowerCase();
+						let userName = responseName.charAt(0).toUpperCase() + responseName.substr(1);
+						let number = res.data.number;
+						alert(`Your ${userName} favorite number is ${number}`);
+					}
+				})
+				.catch((err) => console.log(err));
 		}
 	};
 

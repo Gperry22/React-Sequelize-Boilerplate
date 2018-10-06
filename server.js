@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-// const routes = require('./routes');
+const routes = require('./routes');
 const db = require('./models');
 const app = express();
 
@@ -13,7 +13,7 @@ app.use(bodyParser.json());
 
 app.use(express.static('client/build'));
 
-// app.use(routes);
+app.use(routes);
 
 //{ force: false } to not overwrite DB each app load
 //{ force: true } to overwrite DB each app load

@@ -1,5 +1,5 @@
 import axios from 'axios';
-var qs = require('qs');
+// var qs = require('qs');
 
 export default {
 	createUser: (data) => {
