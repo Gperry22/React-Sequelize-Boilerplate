@@ -1,3 +1,8 @@
+//All routes lead to the controllers file
+//require your models and export your functions
+//below you will see the create and findNumber functions that are called from the
+//routes/api/user file
+
 const db = require('../models');
 
 module.exports = {

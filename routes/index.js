@@ -1,8 +1,16 @@
-const path = require('path');
-const router = require('express').Router();
-const apiRoutes = require('./api');
+//I could just put all my routes in this file for just one table in my db such as users,
+//but what if I had a table for users, animals, etc... that will end up messy
+//so using route.use to separate my routes
 
-// API Routes
+//=======================IF YOU WANT TO BREAK UP ALL ROUTES(CONTROLLERS IN SEP FILES... SEE BELOW)=================================
+
+const router = require('express').Router();
+const path = require('path');
+
+//apiRoutes == everything in the Api Folder
+//setting all routes to start with /api and then whats in api will follow hence the const apiRoutes
+//basically all routes in the api folder will start with /api
+const apiRoutes = require('./api');
 router.use('/api', apiRoutes);
 
 // If no API routes are hit, send the React app
@@ -12,15 +20,13 @@ router.use(function(req, res) {
 
 module.exports = router;
 
-
-
-//========================================================
+//=======================IF YOU WANT TO PUT ALL ROUTES(CONTROLLERS IN ONE FILE... SEE BELOW)=================================
 // const router = require('express').Router();
 // const db = require('../models');
 
 // module.exports = router;
 
- // Sample  routes ========================================================
+// Sample  routes ========================================================
 // //Route for creating user and number
 // router.post('/api/user', function(req, res) {
 // 	db.User.create(req.body).then(function(user) {
